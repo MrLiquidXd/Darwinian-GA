@@ -1,4 +1,7 @@
 ![logo](https://github.com/MrLiquidXd/Darwinian-GA/assets/161674051/0ed0b889-2553-43f9-8271-e38d9c89456a)
+
+[Ссылка на PyPi](https://test.pypi.org/project/Darwinian)
+
 ## Вдохновлен EasyGa ❤️ 
 [ссылка на их проект](https://github.com/danielwilczak101/EasyGA?ysclid=lt6np341qo375655432)
 
