@@ -6,8 +6,8 @@ import random
 maxGA = Darwinian_GA()
 
 # Функция приспособленности
-def fitness(individual):
-    return sum(individual)
+def fitness(*individual):
+    return sum(individual[0])
 
 # инициализируем 
 maxGA.setup(10, 10, 0.01, 0.8, 100, fitness, lambda: random.randint(0, 1))
