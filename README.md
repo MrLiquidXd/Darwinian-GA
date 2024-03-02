@@ -28,9 +28,8 @@
 - `roulette_selection`: Выбирает особь из популяции с использованием выбора рулеткой.
 - `crossover`: Объединяет гены двух особей для создания новой.
 - `mutate`: Вносит небольшие изменения в особь.
-- `bestparents`: Запускает GA с использованием метода выбора Лучшие Родители.
-- `tournament`: Запускает GA с использованием метода выбора Турнир.
-- `rulette`: Запускает GA с использованием метода выбора Рулетка.
+- `constructor`: Запускает GA с использованием указанного метода.
+
 
 ## Использование
 
@@ -38,7 +37,7 @@
 
 
 ```python
-from darwinian import darwinian_GA
+from darwinian import Darwinian_GA
 import random
 
 # Определите функцию приспособленности
@@ -46,18 +45,18 @@ def fitness(individual):
     return sum(individual)
 
 # Инициализируйте GA
-ga = darwinian_GA()
+ga = Darwinian_GA()
 ga.setup(len_gen=10, pop_size=100, mutation_rate=0.1, crossover_chance=0.5, epochs=100, fitness_func=fitness)
 
 # Запустите GA
-best_individuals = ga.bestparents()
+best_individuals = ga.constructor()
 print(best_individuals[0])
 ```
 
-GA будет развивать популяцию в течение указанного количества эпох и возвращать лучших особей из окончательной популяции. Вы также можете распечатать популяцию на каждой эпохе, чтобы наблюдать за прогрессом GA.
+GA будет развивать популяцию в течение указанного количества эпох и возвращать лучших особей из окончательной популяции. Вы также можете вывести популяцию на каждой эпохе, чтобы наблюдать за прогрессом GA.
 
 ```python
-ga.bestparents(print_pop=True)
+ga.constructor(print_pop=True)
 ```
 
 ## Кастомизация функции генерации особи rand_func
@@ -69,18 +68,18 @@ ga.bestparents(print_pop=True)
 Ее можно переопределить:
 
 ```python
-from darwinian import darwinian_GA
+from darwinian import Darwinian_GA
 import random
 
 def fitness(individual):
     return sum(individual)
 
 # Инициализируйте GA
-ga = darwinian_GA()
+ga = Darwinian_GA()
 ga.setup(len_gen=10, pop_size=100, mutation_rate=0.1, crossover_chance=0.5, epochs=100, fitness_func=fitness, rand_func= lambda: random.randint(0, 5))
 
 # Запустите GA
-best_individuals = ga.bestparents()
+best_individuals = ga.constructor()
 print(best_individuals[0])
 ```
 
@@ -96,7 +95,7 @@ print(best_individuals[0])
 то вы можете использовать параметр `MaxOrMin=False`
 
 ```python
-best_individuals = ga.bestparents(MaxOrMin=False)
+best_individuals = ga.constructor(MaxOrMin=False)
 print(best_individuals[0])
 ```
 
