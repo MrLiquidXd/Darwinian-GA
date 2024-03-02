@@ -25,7 +25,7 @@ items = {
 
 max_weight = 40 # максимальный вес рюкзака
 
-def backpack_func(individual):
+def backpack_func(*individual):
     """
     функция приспособленности, которая считает цену
     для данной комбинации предметов в рюкзаке
@@ -33,7 +33,7 @@ def backpack_func(individual):
     total_weight = 0
     total_price = 0
     unique_items = set() # набор уникальных предметов в рюкзаке
-    for item in individual:
+    for item in individual[0]:
         if item != "ничто":
             if item in unique_items:
                 return -100 # если предмет повторяется, то цена равна -100
