@@ -81,13 +81,14 @@ class Darwinian_GA():
     
     # __selection_constructor__
     
-    def constructor(self, selection_method: str = "bestparents", MaxOrMin: bool = True, how_much: int = 5, print_pop: bool = False, **kwargs) -> list:
+    def constructor(self, selection_method: str = "bestparents", MaxOrMin: bool = True, how_much: int = 5, print_pop: bool = False, args_for_fitness_func: list = [], **kwargs) -> list:
         """
         Аргументы:
-            selection_method (str, optional): _description_. Defaults to "bestparents".
-            MaxOrMin (bool, optional): _description_. Defaults to True.
-            how_much (int, optional): _description_. Defaults to 5.
-            print_pop (bool, optional): _description_. Defaults to False.
+            selection_method (str, optional): по умолчанию "bestparents".
+            MaxOrMin (bool, optional): по умолчанию True.
+            how_much (int, optional): по умолчанию 5.
+            print_pop (bool, optional): по умолчанию False.
+            args_for_fitness_func(list, optional): дополнительные аргументы для функции приспособленности
 
         Ща покажу как этим пользоваться:
         1) bestparents - выбираем двух лучших родителей
@@ -96,8 +97,17 @@ class Darwinian_GA():
         
         При турнирном отборе можно задать параметр tournament_size, по умолчанию равен 2
         """
+        
+        self_args = {
+            "len_gen": self.len_gen, 
+            "pop_size": self.pop_size, 
+            "mutation_rate": self.mutation_rate, 
+            "crossover_chance": self.crossover_chance, 
+            "epochs": self.epochs
+            }
+        
         for i in range(self.epochs):
-            l = list(zip(self.population, map(self.fitness, self.population)))
+            l = list(zip(self.population, map(lambda x: self.fitness(x, {"current_epoch": i}, self_args, *args_for_fitness_func), self.population)))
             best = sorted(l, key=lambda x: x[1], reverse=MaxOrMin)[:how_much]
             if print_pop: print(best)
             self.population = list()
@@ -126,7 +136,7 @@ class Darwinian_GA():
                         raise ValueError("Я твоя не понимать!")
             for i in self.population:
                 i = self.mutate(i)
-        l = list(zip(self.population, map(self.fitness, self.population)))
+        l = list(zip(self.population, map(lambda x: self.fitness(x, {"current_epoch": self.epochs}, self_args, *args_for_fitness_func), self.population)))
         best = sorted(l, key=lambda x: x[1], reverse=MaxOrMin)[:how_much]
         return best
     
