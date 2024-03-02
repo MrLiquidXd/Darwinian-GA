@@ -30,6 +30,22 @@
 - `mutate`: Вносит небольшие изменения в особь.
 - `constructor`: Запускает GA с использованием указанного метода.
 
+## constructor
+
+- `constructor`: Запускает GA с использованием указанного метода.
+Аргументы:
+        selection_method (str, optional): _description_. Defaults to "bestparents".
+        MaxOrMin (bool, optional): _description_. Defaults to True.
+        how_much (int, optional): _description_. Defaults to 5.
+        print_pop (bool, optional): _description_. Defaults to False.
+
+    Ща покажу как этим пользоваться:
+    1) bestparents - выбираем двух лучших родителей
+    2) tournament - выбираем двух родителей с помощью турнирного отбора
+    3) roulette - выбираем двух родителей с помощью рулетки
+    
+    При турнирном отборе можно задать параметр tournament_size, по умолчанию равен 2
+
 
 ## Использование
 
@@ -41,8 +57,8 @@ from darwinian import Darwinian_GA
 import random
 
 # Определите функцию приспособленности
-def fitness(individual):
-    return sum(individual)
+def fitness(*individual):
+    return sum(individual[0])
 
 # Инициализируйте GA
 ga = Darwinian_GA()
@@ -71,8 +87,8 @@ ga.constructor(print_pop=True)
 from darwinian import Darwinian_GA
 import random
 
-def fitness(individual):
-    return sum(individual)
+def fitness(*individual):
+    return sum(individual[0])
 
 # Инициализируйте GA
 ga = Darwinian_GA()
@@ -104,3 +120,4 @@ print(best_individuals[0])
 ```python 
 ([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0)
 ```
+
