@@ -36,7 +36,7 @@ ga.setup(
     len_gen=dlina+1, pop_size=150, mutation_rate=0.08, crossover_chance=0.7, epochs=1000, fitness_func=path, rand_func= lambda: random.randint(0, dlina),
 )
 
-best = ga.constructor(False)[0]
+best = ga.constructor(MaxOrMin=False)[0]
 
 print(f"кротчайший путь: {best[0]}, расстояние: {path(best[0], False)}")
 
