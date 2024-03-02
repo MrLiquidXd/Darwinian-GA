@@ -1,10 +1,9 @@
 # задача о рюкзаке
 
 # импорт библиотек
-from darwinian import darwinian_GA
+from darwinian import Darwinian_GA
 import random
-
-backpack = darwinian_GA() # объект, который будет выполнять задачу
+backpack = Darwinian_GA() # объект, который будет выполнять задачу
 
 # словарь, где ключ - название предмета, а значение - пара (вес, цена)
 items = {
@@ -56,7 +55,7 @@ backpack.setup(
     rand_func=lambda: random.choice(list(items.keys())), # функция для рандома
     ) # настройка объекта для выполнения задачи
 
-best = backpack.bestparents()[0] # лучшая комбинация из поколения
+best = backpack.constructor()[0] # лучшая комбинация из поколения
 filtered = [gen for gen in best[0] if gen != "ничто"] # отфильтрованный список без "ничего"
 
 print(filtered) # печатаем отфильтрованный список
