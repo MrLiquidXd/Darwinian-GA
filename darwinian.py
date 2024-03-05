@@ -1,6 +1,6 @@
 import random
 
-class Darwinian_GA():
+class Darwinian_GA:
     def __init__(self) -> None:
         """
         Привет, используй .setup()! 
@@ -42,6 +42,8 @@ class Darwinian_GA():
         Выбираем двух родителей с помощью турнирного отбора
         '''
         # Случайным образом выбираем особей для турнира
+        if tournament_size > len(self.population):
+            tournament_size = len(self.population)
         tournament = random.sample(self.population, tournament_size)
         # Определяем лучшую особь в турнире
         best_individual = max(tournament, key=self.fitness)
@@ -96,6 +98,13 @@ class Darwinian_GA():
         3) roulette - выбираем двух родителей с помощью рулетки
         
         При турнирном отборе можно задать параметр tournament_size, по умолчанию равен 2
+        
+        ВНИМАНИЕ функция приспособленности должна начинаться так: 
+        
+        def fitness_func(*args):
+            individual = args[0]
+            ...
+            return <какое то число>
         """
         
         self_args = {
@@ -140,3 +149,12 @@ class Darwinian_GA():
         best = sorted(l, key=lambda x: x[1], reverse=MaxOrMin)[:how_much]
         return best
     
+
+# Создаем экземпляр класса
+ga = Darwinian_GA()
+
+# Устанавливаем параметры
+ga.setup(len_gen=10, pop_size=100, mutation_rate=0.1, crossover_chance=0.9, epochs=100, fitness_func=lambda *x: sum(x[0]), rand_func= lambda: random.randint(0, 10))
+
+# Запускаем алгоритм
+best_individuals = ga.constructor(selection_method="tournament", MaxOrMin=True, how_much=5, print_pop=False, tournament_size=6)
