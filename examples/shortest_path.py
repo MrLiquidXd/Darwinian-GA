@@ -17,15 +17,15 @@ points_coords = {
 
 dlina = len(points_coords)-1
 
-def path(*individual, a = True):
+def path(*ind):
     total = 0
-    individual = individual[0]
+    individual = ind[0]
     for i in range(len(individual) - 1):
         total += ((points_coords[individual[i]][0] - points_coords[individual[i + 1]][0]) ** 2 + (points_coords[individual[i]][1] - points_coords[individual[i + 1]][1]) ** 2) ** 0.5
     for i in individual:
         if individual.count(i) > 1:
             total += 100
-    if a:
+    if ind[1] != False:
         if individual[0] == 0: total -= 100
         if individual[dlina] == dlina: total -= 100
 
